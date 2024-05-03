@@ -11,6 +11,8 @@ PROMPTS = [
 ]
 
 if __name__ == "__main__":
+    print(DATA_DIR)
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
     for prompt in PROMPTS:
         print(f"Computing circuit for prompt: {prompt}")
         builder = SparseFeatureCircuitBuilder(text=prompt)

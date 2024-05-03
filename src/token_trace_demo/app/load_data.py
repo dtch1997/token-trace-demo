@@ -2,10 +2,8 @@ import json
 import pathlib
 
 from hashlib import md5
+from token_trace_demo.constants import DATA_DIR
 from token_trace_demo.circuit import SparseFeatureCircuit
-
-ROOT_DIR = pathlib.Path(__file__).parent.parent.parent
-DATA_DIR = ROOT_DIR / "app" / "data"
 
 
 def list_existing_circuits() -> list[str]:

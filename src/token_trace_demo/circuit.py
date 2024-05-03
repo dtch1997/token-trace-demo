@@ -8,12 +8,12 @@ import pandas as pd
 @dataclass
 class SparseFeatureCircuitMetadata:
     """Metadata for a SparseFeatureCircuit"""
-    model_name: str # The base model name
+
+    model_name: str  # The base model name
     sae_source: str  # The source of the SAEs used
     text: str
     token_strs: list[str]
     prompt_info: str
-
 
     def save(self, save_dir: pathlib.Path):
         with open(save_dir / "metadata.json", "w") as f:
@@ -24,6 +24,7 @@ class SparseFeatureCircuitMetadata:
         with open(save_dir / "metadata.json") as f:
             metadata = json.load(f)
         return SparseFeatureCircuitMetadata(**metadata)
+
 
 @dataclass
 class SparseFeatureCircuit:
@@ -65,7 +66,6 @@ class SparseFeatureCircuit:
 
     @staticmethod
     def load(save_dir: pathlib.Path) -> "SparseFeatureCircuit":
-
         if (save_dir / "node.csv").exists():
             node_ie_df = pd.read_csv(save_dir / "node.csv", index_col=0)
         else:
@@ -84,5 +84,5 @@ class SparseFeatureCircuit:
         return SparseFeatureCircuit(
             node_ie_df=node_ie_df,  # type: ignore
             edge_ie_df=edge_ie_df,  # type: ignore
-            metadata=metadata
+            metadata=metadata,
         )

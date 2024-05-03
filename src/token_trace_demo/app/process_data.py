@@ -1,5 +1,6 @@
 import pandas as pd
 
+
 def process_node_data(node_df: pd.DataFrame) -> pd.DataFrame:
     """Process the node dataframe to add additional columns."""
     # Add total absolute indirect effect in layer

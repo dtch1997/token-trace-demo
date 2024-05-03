@@ -22,17 +22,14 @@ def list_existing_circuits() -> list[str]:
     return existing_texts
 
 
-def load_circuit(
-    text: str, data_dir: pathlib.Path = DATA_DIR
-) -> SparseFeatureCircuit:
+def load_circuit(text: str, data_dir: pathlib.Path = DATA_DIR) -> SparseFeatureCircuit:
     """Load or compute the circuit data."""
     prefix = md5(text.encode()).hexdigest()[:16]
     circuit = SparseFeatureCircuit.load(data_dir / prefix)
     return circuit
 
-def load_metadata(
-    text: str, data_dir: pathlib.Path = DATA_DIR
-) -> dict:
+
+def load_metadata(text: str, data_dir: pathlib.Path = DATA_DIR) -> dict:
     """Load the metadata for the circuit."""
     prefix = md5(text.encode()).hexdigest()[:16]
     with open(data_dir / prefix / "metadata.json") as f:

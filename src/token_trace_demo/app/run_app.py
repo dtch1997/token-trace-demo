@@ -3,11 +3,8 @@ from collections.abc import Sequence
 from typing import cast
 
 import pandas as pd
-import plotly.graph_objects as go
 import plotly.express as px
 import streamlit as st
-from annotated_text import annotated_text
-from plotly.subplots import make_subplots
 
 from token_trace_demo.app.load_data import DATA_DIR, get_circuit, list_existing_circuits
 from token_trace_demo.app.process_data import process_node_data
@@ -211,7 +208,9 @@ def plot_tokenwise_feature_attribution_for_layer(
 
     k_nodes = 10
 
-    def get_top_k_features(df: pd.DataFrame, layer: int, k_nodes: int) -> pd.Series[int]:
+    def get_top_k_features(
+        df: pd.DataFrame, layer: int, k_nodes: int
+    ) -> pd.Series[int]:
         df = df[
             ["layer", "act_idx", "act_type", "total_abs_ie_across_token_position"]
         ].drop_duplicates()
@@ -306,13 +305,13 @@ def run_app(precomputed_only: bool = True, data_dir: pathlib.Path = DATA_DIR):
 
     # List existing circuits
     st.header("View a pre-computed prompt")
-    existing_texts = list_existing_circuits()    
+    existing_texts = list_existing_circuits()
     text = st.selectbox("Select a prompt", existing_texts, index=0)
 
     # Load circuit
     circuit = get_circuit(text, data_dir=data_dir)
 
-    # TODO: Display circuit metadata    
+    # TODO: Display circuit metadata
     metadata = circuit.metadata
 
     # Load node attributions

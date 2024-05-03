@@ -2,6 +2,7 @@ import json
 import urllib.parse
 import webbrowser
 
+
 def get_neuronpedia_url(
     layer: int, features: list[int], name: str = "temporary_list"
 ) -> str:

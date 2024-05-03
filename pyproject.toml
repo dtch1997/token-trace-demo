@@ -1,0 +1,24 @@
+[project]
+name = "token-trace-demo"
+version = "0.1.0"
+description = "MVP for token-trace"
+authors = [
+    {name = "Daniel Tan", email = "dtch1997@users.noreply.github.com"},
+]
+dependencies = [
+    "pandas>=2.2.2",
+    "plotly>=5.22.0",
+    "streamlit>=1.34.0",
+    "st-annotated-text>=4.0.1",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+
+[tool.pdm]
+distribution = true

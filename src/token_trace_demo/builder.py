@@ -3,7 +3,7 @@ import pathlib
 import pandas as pd
 
 from transformer_lens import HookedTransformer
-from token_trace_demo.types import MetricFunction, SAEDict, SAEActivationCache
+from token_trace_demo.types import MetricFunction, SAEDict
 from token_trace_demo.load_pretrained_model import load_model, load_sae_dict
 from token_trace_demo.constants import (
     DEFAULT_MODEL_NAME,
@@ -15,7 +15,10 @@ from token_trace_demo.circuit import (
     SparseFeatureCircuitMetadata,
 )
 from token_trace_demo.utils import last_token_prediction_loss
-from token_trace_demo.sae_activation_cache import get_sae_activation_cache
+from token_trace_demo.sae_activation_cache import (
+    get_sae_activation_cache,
+    SAEActivationCache,
+)
 from token_trace_demo.node_attribution import compute_node_attribution, filter_nodes
 
 

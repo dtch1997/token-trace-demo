@@ -4,7 +4,5 @@ services:
     build:
       dockerfile: app/Dockerfile
       context: ..
-    volumes:
-      - .:/app
     ports:
       - 8501:8501

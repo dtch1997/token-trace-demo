@@ -1,14 +1,15 @@
 FROM python:3.12-slim
 
-# Install dependencies
-RUN python -m pip install --upgrade pip
+# Install pdm 
+RUN curl -sSL https://pdm-project.org/install-pdm.py | python3 -
+RUN echo $(pdm --version)
 
 # Run code
 RUN mkdir -p /workdir
-WORKDIR /workdir
 COPY . /workdir
-RUN python -m pip --timeout 1000 install -e .
+WORKDIR /workdir
+RUN pdm install
 
 EXPOSE 8501
 # RUN python -m token_trace.load_pretrained_model
-CMD ["streamlit", "run", "app/token_trace_app.py"]
+CMD ["streamlit", "run", "src/token_trace_demo/app/run_app.py"]

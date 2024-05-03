@@ -1,1 +1,0 @@
-Here, we save pre-computed indirect effects for strings. 

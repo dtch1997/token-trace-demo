@@ -36,7 +36,7 @@ smmap==5.0.1
 st-annotated-text==4.0.1
 streamlit==1.34.0
 tenacity==8.2.3
--e git+ssh://git@github.com/token-trace/token-trace-demo.git@e0eb5cf2fba67ab38368834f7469d014a63cf4fe#egg=token_trace_demo
+-e git+https://github.com/dtch1997/token-trace-demo.git@e0eb5cf2fba67ab38368834f7469d014a63cf4fe#egg=token_trace_demo
 toml==0.10.2
 toolz==0.12.1
 tornado==6.4

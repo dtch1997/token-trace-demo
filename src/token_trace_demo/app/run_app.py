@@ -6,7 +6,11 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 
-from token_trace_demo.app.load_data import DATA_DIR, get_circuit, list_existing_circuits
+from token_trace_demo.app.load_data import (
+    DATA_DIR,
+    load_circuit,
+    list_existing_circuits,
+)
 from token_trace_demo.app.process_data import process_node_data
 from token_trace_demo.app.utils import get_neuronpedia_url
 
@@ -208,9 +212,7 @@ def plot_tokenwise_feature_attribution_for_layer(
 
     k_nodes = 10
 
-    def get_top_k_features(
-        df: pd.DataFrame, layer: int, k_nodes: int
-    ) -> pd.Series[int]:
+    def get_top_k_features(df: pd.DataFrame, layer: int, k_nodes: int) -> pd.Series:
         df = df[
             ["layer", "act_idx", "act_type", "total_abs_ie_across_token_position"]
         ].drop_duplicates()
@@ -222,7 +224,7 @@ def plot_tokenwise_feature_attribution_for_layer(
         top_k = df.head(k_nodes)
         features = top_k[top_k["layer"] == layer]["act_idx"]
 
-        return cast(pd.Series[int], features)
+        return cast(pd.Series, features)
 
     features = get_top_k_features(df, layer, k_nodes)
 
@@ -300,19 +302,22 @@ def add_section_tokenwise_attribution_all_layers(tokens: list[str], df: pd.DataF
             st.plotly_chart(subfig, use_container_width=True)
 
 
-def run_app(precomputed_only: bool = True, data_dir: pathlib.Path = DATA_DIR):
+def run_app(data_dir: pathlib.Path = DATA_DIR):
     st.set_page_config(layout="wide")
 
     # List existing circuits
     st.header("View a pre-computed prompt")
     existing_texts = list_existing_circuits()
     text = st.selectbox("Select a prompt", existing_texts, index=0)
+    assert isinstance(text, str)
 
     # Load circuit
-    circuit = get_circuit(text, data_dir=data_dir)
+    print(f"Loading circuit for text: {text}")
+    circuit = load_circuit(text, data_dir=data_dir)
 
     # TODO: Display circuit metadata
     metadata = circuit.metadata
+    assert metadata is not None
 
     # Load node attributions
     df = process_node_data(circuit.node_ie_df)
@@ -325,3 +330,7 @@ def run_app(precomputed_only: bool = True, data_dir: pathlib.Path = DATA_DIR):
 
     # Visualize token-wise attributions
     add_section_tokenwise_attribution_all_layers(metadata.token_strs, df.copy())
+
+
+if __name__ == "__main__":
+    run_app()

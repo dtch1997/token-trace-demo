@@ -39,7 +39,7 @@ class SparseFeatureCircuit:
     def copy(self):
         return SparseFeatureCircuit(
             node_ie_df=self.node_ie_df.copy(),  # type: ignore
-            circuit_metadata=self.circuit_metadata,
+            metadata=self.metadata,
         )
 
     @property

@@ -1,0 +1,1 @@
+{"model_name": "gpt2-small", "sae_source": "jbloom/GPT2-Small-SAEs", "text": "When Tim and Jane went to the shops, Tim gave the bag to Jane", "token_strs": ["<|endoftext|>", "When", " Tim", " and", " Jane", " went", " to", " the", " shops", ",", " Tim", " gave", " the", " bag", " to", " Jane"], "prompt_info": "TODO"}

@@ -1,0 +1,1 @@
+{"model_name": "gpt2-small", "sae_source": "jbloom/GPT2-Small-SAEs", "text": "Fact: Delhi is a city in the country of India", "token_strs": ["<|endoftext|>", "Fact", ":", " Delhi", " is", " a", " city", " in", " the", " country", " of", " India"], "prompt_info": "TODO"}

@@ -1,7 +1,7 @@
 from token_trace_demo.builder import SparseFeatureCircuitBuilder
 from token_trace_demo.app.load_data import DATA_DIR, hash_text
 
-PROMPTS = [
+TEXTS = [
     # IOI
     "When John and Mary went to the shops, John gave the bag to Mary",
     "When Tim and Jane went to the shops, Tim gave the bag to Jane",
@@ -13,9 +13,13 @@ PROMPTS = [
 if __name__ == "__main__":
     print(DATA_DIR)
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    for prompt in PROMPTS:
-        print(f"Computing circuit for prompt: {prompt}")
-        builder = SparseFeatureCircuitBuilder(text=prompt)
+    for text in TEXTS:
+        save_dir = DATA_DIR / hash_text(text)
+        if save_dir.exists():
+            print(f"Skipping text: {text}")
+            continue
+        print(f"Computing circuit for text: {text}")
+        builder = SparseFeatureCircuitBuilder(text=text)
         builder.compute_circuit()
         circuit = builder.circuit
         metadata = builder.metadata

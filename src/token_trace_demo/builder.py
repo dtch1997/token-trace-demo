@@ -44,15 +44,13 @@ class SparseFeatureCircuitBuilder:
         self.text = text
         self.min_node_abs_ie = min_node_abs_ie
         self.max_n_nodes = max_n_nodes
-        self.node_ie_df = None
-        self.edge_ie_df = None
+        self.node_ie_df = pd.DataFrame()
 
     @property
     def circuit(self):
         """Get the circuit at the current stage"""
         return SparseFeatureCircuit(
             node_ie_df=self.node_ie_df,
-            edge_ie_df=self.edge_ie_df,
         )
 
     @property
@@ -128,8 +126,6 @@ class SparseFeatureCircuitBuilder:
             "text": self.text,
             "min_node_abs_ie": self.min_node_abs_ie,
             "max_n_nodes": self.max_n_nodes,
-            "min_edge_abs_ie": self.min_edge_abs_ie,
-            "max_n_edges": self.max_n_edges,
         }
         with open(save_dir / "args.json", "w") as f:
             json.dump(args, f)

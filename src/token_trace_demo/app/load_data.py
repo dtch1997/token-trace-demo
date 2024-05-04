@@ -5,6 +5,8 @@ from hashlib import md5
 from token_trace_demo.constants import DATA_DIR
 from token_trace_demo.circuit import SparseFeatureCircuit
 
+def hash_text(text: str) -> str:
+    return md5(text.encode()).hexdigest()[:16]
 
 def list_existing_circuits() -> list[str]:
     existing_texts = []
@@ -22,14 +24,12 @@ def list_existing_circuits() -> list[str]:
 
 def load_circuit(text: str, data_dir: pathlib.Path = DATA_DIR) -> SparseFeatureCircuit:
     """Load or compute the circuit data."""
-    prefix = md5(text.encode()).hexdigest()[:16]
-    circuit = SparseFeatureCircuit.load(data_dir / prefix)
+    circuit = SparseFeatureCircuit.load(data_dir / hash_text(text))
     return circuit
 
 
 def load_metadata(text: str, data_dir: pathlib.Path = DATA_DIR) -> dict:
     """Load the metadata for the circuit."""
-    prefix = md5(text.encode()).hexdigest()[:16]
-    with open(data_dir / prefix / "metadata.json") as f:
+    with open(data_dir / hash_text(text) / "metadata.json") as f:
         metadata = json.load(f)
     return metadata
